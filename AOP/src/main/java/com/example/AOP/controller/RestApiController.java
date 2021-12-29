@@ -1,7 +1,10 @@
 package com.example.AOP.controller;
 
+import com.example.AOP.annotation.Timer;
 import com.example.AOP.dto.User;
 
+import org.springframework.util.StopWatch;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +41,17 @@ public class RestApiController {
 
     @PostMapping("/post")
     public User post(@RequestBody User user) {
+
         System.out.println("post method : " + user);
+
         return user;
+    }
+
+    @Timer
+    @DeleteMapping("/delete")
+    public void delete() throws InterruptedException {
+
+        Thread.sleep(1000 * 2);
+
     }
 }
